@@ -27,6 +27,9 @@ namespace UnityStandardAssets.Characters.FirstPerson
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        public GameObject Parachute;
+        public GameObject FPS;
+        private bool isParachuteOpened = false;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -55,6 +58,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_Jumping = false;
             m_AudioSource = GetComponent<AudioSource>();
 			m_MouseLook.Init(transform , m_Camera.transform);
+            Parachute.SetActive(false);
         }
 
 
@@ -83,6 +87,23 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
         }
 
+        public void JumpParachute()
+        {
+            Parachute.SetActive(true);
+            isParachuteOpened = true;
+            m_JumpSpeed = 0f;
+            m_GravityMultiplier = .1f;
+
+        }
+
+        public void CloseParachute()
+        {
+            Parachute.SetActive(false);
+            isParachuteOpened = false;
+            m_JumpSpeed = 10f;
+            m_GravityMultiplier = 2f;
+        }
+
 
         private void PlayLandingSound()
         {
@@ -108,6 +129,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             m_MoveDir.x = desiredMove.x*speed;
             m_MoveDir.z = desiredMove.z*speed;
 
+            if (FPS.transform.position.y < 4 && isParachuteOpened)
+            {
+                CloseParachute();
+            }
+            if (FPS.transform.position.y > 20 )
+            {
+                m_JumpSpeed = 0f;
+            }
+
 
             if (m_CharacterController.isGrounded)
             {
@@ -119,6 +149,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
                     PlayJumpSound();
                     m_Jump = false;
                     m_Jumping = true;
+                    if (FPS.transform.position.y > 20) {
+                        JumpParachute();
+                    }
+
                 }
             }
             else
@@ -242,6 +276,10 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void OnControllerColliderHit(ControllerColliderHit hit)
         {
+            if (FPS.transform.position.y < 15)
+            {
+                CloseParachute();
+            }
             Rigidbody body = hit.collider.attachedRigidbody;
             //dont move the rigidbody if the character is on top of it
             if (m_CollisionFlags == CollisionFlags.Below)
