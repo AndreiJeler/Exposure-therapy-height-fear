@@ -10,7 +10,6 @@ public class LightsScript : MonoBehaviour
     public Light mainLight;
 
 
-
     void EnableLights(bool enable)
     {
         foreach (var light in FindObjectsOfType<Light>()) light.enabled = enable;

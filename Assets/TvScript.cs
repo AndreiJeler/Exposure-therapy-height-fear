@@ -5,6 +5,7 @@ using UnityEngine;
 public class TvScript : MonoBehaviour
 {
     public UnityEngine.Video.VideoClip videoClip;
+    bool isPlayin = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,8 +25,18 @@ public class TvScript : MonoBehaviour
 
     void OnMouseDown()
     {
+
         var vp = GetComponent<UnityEngine.Video.VideoPlayer>();
-        vp.Play();
+        if (!isPlayin)
+        {
+            vp.Play();
+            isPlayin = true;
+        }
+        else
+        {
+            isPlayin = false;
+            vp.Stop();
+        }
     }
 
 }
