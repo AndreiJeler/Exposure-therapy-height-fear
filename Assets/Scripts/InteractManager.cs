@@ -16,13 +16,24 @@ public class InteractManager : MonoBehaviour {
 	
 	private bool isPressed;
 	private GameObject objectInteract;
-	
+
+	public GameObject EasterEggText1;
+	public GameObject EasterEggText2;
+	public GameObject EasterEggText3;
+
+
+
 	void Start () {
 		playerCam = Camera.main.gameObject;
 		isPressed = false;
 		objectInteract = null;
+		EasterEggText1.SetActive(false);
+		EasterEggText2.SetActive(false);
+		EasterEggText3.SetActive(false);
+
+
 	}
-	
+
 	void Update () {
 		if(Input.GetButton(UseButton) && !isPressed){
 			Interact();
@@ -45,6 +56,18 @@ public class InteractManager : MonoBehaviour {
 			if(hit.collider.tag == "ElevatorDown"){
 				InteractUse("ElevatorDown");
 			}
+			if (hit.collider.tag == "computer")
+			{
+				OpenEasterEgg1();
+			}
+			if (hit.collider.tag == "keyboard")
+			{
+				OpenEasterEgg2();
+			}
+            if (hit.collider.tag == "easterEgg")
+            {
+				OpenEasterEggFinal();
+            }
 		}
 	}
 	
@@ -52,4 +75,19 @@ public class InteractManager : MonoBehaviour {
     {
 		objectInteract.GetComponent<ElevatorButton>().SendCall(Call);
     }
+
+	private void OpenEasterEgg1()
+    {
+		EasterEggText1.SetActive(true);
+    }
+
+	private void OpenEasterEgg2()
+	{
+		EasterEggText2.SetActive(true);
+	}
+	private void OpenEasterEggFinal()
+	{
+		Debug.Log("Congrats");
+		EasterEggText3.SetActive(true);
+	}
 }
