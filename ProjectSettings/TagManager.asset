@@ -18,6 +18,7 @@ TagManager:
   - monitor-text
   - laptop-text
   - easterEgg
+  - tv
   layers:
   - Default
   - TransparentFX

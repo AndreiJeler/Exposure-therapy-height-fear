@@ -68,6 +68,11 @@ public class InteractManager : MonoBehaviour {
             {
 				OpenEasterEggFinal();
             }
+			/*if (hit.collider.tag == "tv")
+			{
+				var vp = hit.rigidbody.GetComponent<UnityEngine.Video.VideoPlayer>();
+					vp.Play();	
+			}*/
 		}
 	}
 	
