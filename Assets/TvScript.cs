@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class TvScript : MonoBehaviour
@@ -9,6 +10,7 @@ public class TvScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        UnityEngine.Debug.Log("start");
         var videoPlayer = gameObject.GetComponent<UnityEngine.Video.VideoPlayer>();
         videoPlayer.playOnAwake = false;
         videoPlayer.clip = videoClip;
@@ -20,16 +22,12 @@ public class TvScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
 
-    private void OnMouseEnter()
-    {       
     }
 
     void OnMouseDown()
     {
-
+        UnityEngine.Debug.Log("clcik");
         var vp = GetComponent<UnityEngine.Video.VideoPlayer>();
         if (!isPlayin)
         {

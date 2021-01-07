@@ -92,7 +92,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
             Parachute.SetActive(true);
             isParachuteOpened = true;
             m_JumpSpeed = 0f;
-            m_GravityMultiplier = .075f;
+            m_GravityMultiplier = .05f;
 
         }
 

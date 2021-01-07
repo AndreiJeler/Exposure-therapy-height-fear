@@ -7,6 +7,7 @@ public class LightsScript : MonoBehaviour
     public bool isNight = false;
     public Material skyDay;
     public Material skyNight;
+    public Material skyExtreme;
     public Light mainLight;
 
 
@@ -18,6 +19,7 @@ public class LightsScript : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 30;
         /*foreach(var light in lights)
         {
             light.active = false;
@@ -47,5 +49,24 @@ public class LightsScript : MonoBehaviour
             }
             isNight = !isNight;
         }
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            RenderSettings.skybox = skyDay;
+            EnableLights(false);
+            mainLight.enabled = true;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            RenderSettings.skybox = skyNight;
+            EnableLights(true);
+            mainLight.enabled = false;
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            RenderSettings.skybox = skyExtreme;
+            EnableLights(false);
+            mainLight.enabled = false;
+        }
     }
+
 }
