@@ -10,7 +10,6 @@ public class TvScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        UnityEngine.Debug.Log("start");
         var videoPlayer = gameObject.GetComponent<UnityEngine.Video.VideoPlayer>();
         videoPlayer.playOnAwake = false;
         videoPlayer.clip = videoClip;
@@ -27,7 +26,6 @@ public class TvScript : MonoBehaviour
 
     void OnMouseDown()
     {
-        UnityEngine.Debug.Log("clcik");
         var vp = GetComponent<UnityEngine.Video.VideoPlayer>();
         if (!isPlayin)
         {
